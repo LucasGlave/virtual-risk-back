@@ -53,7 +53,7 @@ Usuario.sync()
       const userSuperAdminToCreate: UsuarioCreationAttributes[] = [
         {
           username: 'Virtual Risk',
-          password: 'Virtual123',
+          password: 'v123',
         },
       ];
       const usersWithHashedPassword: UsuarioCreationAttributes[] = userSuperAdminToCreate.map((user) => {

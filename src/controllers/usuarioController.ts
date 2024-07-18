@@ -3,7 +3,6 @@ import userService from "../services/userService";
 
 const loginUser = async (req: Request, res: Response) => {
   const { username, password } = req.body;
-  console.log(username, password);
   if (!username || !password) {
     return res.status(400).send("All fields are required");
   }

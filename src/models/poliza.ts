@@ -46,7 +46,7 @@ Poliza.init(
         allowNull: false,
     },
     premio: {
-        type: DataTypes.NUMBER,
+        type: DataTypes.INTEGER,
         allowNull: false,
     },
     formaDePago: {
@@ -55,7 +55,6 @@ Poliza.init(
     },
     numero: {
         type: DataTypes.STRING,
-        allowNull: true,
     },
   },
   {
