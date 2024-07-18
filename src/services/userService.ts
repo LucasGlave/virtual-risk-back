@@ -15,7 +15,7 @@ const loginUser = async (username: string, password: string):Promise<{
         const payload = {
             username: user.username,
         };
-        const token = generateToken(payload, "1d");
+        const token = generateToken(payload, "7d");
         return {payload, token}
     } catch(error) {
         throw new Error("Error when trying to login user:" + error)

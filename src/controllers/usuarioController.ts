@@ -1,36 +1,34 @@
-import { Request, Response } from 'express';
-import userService from "../services/userService"
+import { Request, Response } from "express";
+import userService from "../services/userService";
 
 const loginUser = async (req: Request, res: Response) => {
-    const { username, password } = req.body;
-    if(!username || !password) {
-        return res.send('All fields are required').status(400)
-    }
-    try {
-        const { payload, token } = await userService.loginUser(username, password);
-        res.cookie("token", token, {
-            sameSite: "none",
-            httpOnly: true,
-            secure: true,
-        });
-        res.status(200).send(`User has been logged `+ payload.username);
-    } catch (error) {
-        res.status(500).send(`Error when trying to login user: ${error}`);
-    }
+  const { username, password } = req.body;
+  console.log(username, password);
+  if (!username || !password) {
+    return res.status(400).send("All fields are required");
+  }
+  try {
+    const { payload, token } = await userService.loginUser(username, password);
+    res.cookie("token", token, {
+      sameSite: "none",
+      httpOnly: true,
+      secure: true, // en producción cambiar a true
+      path: "/", // asegúrate de que el path coincida
+    });
+    res.status(200).send(`User has been logged`);
+  } catch (error) {
+    res.status(500).send(`Error when trying to login user: ${error}`);
+  }
 };
 
-const logoutUser = async (req: Request, res: Response) => {
-    try {
-        res.cookie("token", "", {
-            sameSite: "none",
-            httpOnly: true,
-            secure: true,
-        });
-        res.status(204).send("Cookies deleted")
-    }
-    catch (error) {
-        res.status(500).send(`Error when trying to logout user: ${error}`);
-    }
+const logoutUser = (req: Request, res: Response) => {
+  res.clearCookie("token", {
+    sameSite: "none",
+    httpOnly: true,
+    secure: true, // en producción cambiar a true
+    path: "/", // asegúrate de que el path coincida
+  });
+  res.status(200).send("Cookies deleted");
 };
 
-export default { loginUser, logoutUser }
+export default { loginUser, logoutUser };
