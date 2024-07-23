@@ -24,6 +24,7 @@ Poliza.init(
     numeroPoliza: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true
     },
     detalle: {
         type: DataTypes.STRING,
@@ -31,7 +32,6 @@ Poliza.init(
     },
     estado: {
         type: DataTypes.STRING,
-        allowNull: false,
         defaultValue: "vigente"
     },
     vigenciaInicio: {
@@ -82,11 +82,11 @@ Poliza.init(
 
 function actualizarEstado(poliza: any) {
   const hoy = new Date();
-  if (poliza.estado !== 'anulada') {
+  if (poliza.estado !== 'ANULADA') {
     if (poliza.vigenciaFin < hoy) {
-      poliza.estado = 'vencida';
+      poliza.estado = 'VENCIDA';
     } else {
-      poliza.estado = 'vigente';
+      poliza.estado = 'VIGENTE';
     }
   }
 }
