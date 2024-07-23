@@ -12,7 +12,7 @@ const loginUser = async (req: Request, res: Response) => {
       sameSite: "none",
       httpOnly: true,
       secure: true, // en producción cambiar a true
-      path: "/", // asegúrate de que el path coincida
+      path: "/",
     });
     res.status(200).send(`User has been logged`);
   } catch (error) {
@@ -25,7 +25,7 @@ const logoutUser = (req: Request, res: Response) => {
     sameSite: "none",
     httpOnly: true,
     secure: true, // en producción cambiar a true
-    path: "/", // asegúrate de que el path coincida
+    path: "/",
   });
   res.status(200).send("Cookies deleted");
 };
