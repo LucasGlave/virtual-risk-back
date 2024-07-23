@@ -46,9 +46,9 @@ const viewPolizas = async (req: Request, res: Response) => {
     }
 };
 
-const viewPolizaById = async (req: Request, res: Response) => {
+const viewPolizaByNumber = async (req: Request, res: Response) => {
     try {
-        const response = await polizaService.viewPolizaById(+req.params.id);
+        const response = await polizaService.viewPolizaByNumber(req.params.poliza);
         if(!response) {
             return res.status(400).send("Poliza not found")
         } else {
@@ -60,9 +60,9 @@ const viewPolizaById = async (req: Request, res: Response) => {
     }
 };
 
-const editPolizaById = async (req: Request, res: Response) => {
+const editPolizaByNumber = async (req: Request, res: Response) => {
     try {
-        const response = await polizaService.editPolizaById(+req.params.id, req.body);
+        const response = await polizaService.editPolizaByNumber(req.params.poliza, req.body);
         if(!response) {
             return res.status(400).send("Poliza not found")
         } else {
@@ -74,9 +74,9 @@ const editPolizaById = async (req: Request, res: Response) => {
     }
 };
 
-const deletePolizaById = async (req: Request, res: Response) => {
+const deletePolizaByNumber = async (req: Request, res: Response) => {
     try {
-        const response = await polizaService.deletePolizaById(+req.params.id);
+        const response = await polizaService.deletePolizaByNumber(req.params.poliza);
         if(!response) {
             return res.status(400).send("Poliza not found")
         } else {
@@ -103,4 +103,4 @@ const filterPolizas = async (req: Request, res: Response) => {
     }
   };
 
-export default {createPoliza, viewPolizas, viewPolizaById, editPolizaById, deletePolizaById, filterPolizas}
+export default {createPoliza, viewPolizas, viewPolizaByNumber, editPolizaByNumber, deletePolizaByNumber, filterPolizas}

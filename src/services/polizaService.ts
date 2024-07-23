@@ -26,18 +26,18 @@ const viewPolizas = async () => {
     return await Poliza.findAll({order:[['id', 'ASC']]});
 }
 
-const viewPolizaById = async (id:number) => {
-    return await Poliza.findByPk(+id);
+const viewPolizaByNumber = async (numeroPoliza:string) => {
+    return await Poliza.findOne({ where: {numeroPoliza}});
 }
 
-const editPolizaById = async (id:number, data: PolizaProps) => {
-    const poliza = await Poliza.findByPk(+id);
+const editPolizaByNumber = async (numeroPoliza:string, data: PolizaProps) => {
+    const poliza = await Poliza.findOne({ where: {numeroPoliza}});
     if(!poliza) throw new Error('Poliza not found')
     return poliza.update({...data})
 }
 
-const deletePolizaById = async (id:number) => {
-    const poliza = await Poliza.findByPk(+id);
+const deletePolizaByNumber = async (numeroPoliza:string) => {
+    const poliza = await Poliza.findOne({ where: {numeroPoliza}});
     if(!poliza) throw new Error('Poliza not found')
     await poliza.destroy()
     return poliza
@@ -68,4 +68,4 @@ const filterPolizas = async (filters: Partial<PolizaProps>) => {
     });
 };
 
-export default {createPoliza, viewPolizas, viewPolizaById, editPolizaById, deletePolizaById, filterPolizas}
+export default {createPoliza, viewPolizas, viewPolizaByNumber, editPolizaByNumber, deletePolizaByNumber, filterPolizas}

@@ -32,6 +32,7 @@ Poliza.init(
     estado: {
         type: DataTypes.STRING,
         allowNull: false,
+        defaultValue: "vigente"
     },
     vigenciaInicio: {
         type: DataTypes.DATE,
@@ -61,7 +62,33 @@ Poliza.init(
     sequelize: db,
     modelName: 'polizas',
     timestamps: false,
+    hooks: {
+      beforeSave: (poliza, options) => {
+        actualizarEstado(poliza)
+      },
+      beforeUpdate: (poliza, options) => {
+        actualizarEstado(poliza);
+      },
+      afterFind: (polizas, options) => {
+        if (Array.isArray(polizas)) {
+          polizas.forEach(poliza => actualizarEstado(poliza));
+        } else if (polizas) {
+          actualizarEstado(polizas);
+        }
+      }
+    }
   }
 );
+
+function actualizarEstado(poliza: any) {
+  const hoy = new Date();
+  if (poliza.estado !== 'anulada') {
+    if (poliza.vigenciaFin < hoy) {
+      poliza.estado = 'vencida';
+    } else {
+      poliza.estado = 'vigente';
+    }
+  }
+}
 
 export default Poliza;
