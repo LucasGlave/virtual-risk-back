@@ -54,6 +54,9 @@ const filterPolizas = async (filters: Partial<PolizaProps>) => {
     if (filters.detalle) {
       whereClause.detalle = { [Op.iLike]: `%${filters.detalle}%` };
     }
+    if (filters.estado) {
+      whereClause.estado = { [Op.iLike]: `%${filters.estado}%` };
+    }
     if (filters.vigenciaInicio && filters.vigenciaFin) {
       whereClause.vigenciaInicio = { [Op.gte]: filters.vigenciaInicio };
       whereClause.vigenciaFin = { [Op.lte]: filters.vigenciaFin };

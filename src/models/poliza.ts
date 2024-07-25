@@ -32,7 +32,7 @@ Poliza.init(
     },
     estado: {
         type: DataTypes.STRING,
-        defaultValue: "vigente"
+        defaultValue: "VIGENTE"
     },
     vigenciaInicio: {
         type: DataTypes.DATE,

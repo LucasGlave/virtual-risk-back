@@ -94,6 +94,7 @@ const filterPolizas = async (req: Request, res: Response) => {
       if (req.query.asegurado) filters.asegurado = req.query.asegurado as string;
       if (req.query.compañia) filters.compañia = req.query.compañia as string;
       if (req.query.detalle) filters.detalle = req.query.detalle as string;
+      if (req.query.estado) filters.estado = req.query.estado as string;
       if (req.query.vigenciaInicio) filters.vigenciaInicio = new Date(req.query.vigenciaInicio as string);
       if (req.query.vigenciaFin) filters.vigenciaFin = new Date(req.query.vigenciaFin as string);
       const polizas = await polizaService.filterPolizas(filters);
