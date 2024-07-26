@@ -22,9 +22,24 @@ const createPoliza = async (data: PolizaProps) => {
     return await Poliza.create({...data})
 }
 
-const viewPolizas = async () => {
-    return await Poliza.findAll({order:[['id', 'ASC']]});
-}
+const viewPolizas = async (page: number, pageSize: number) => {
+  const offset = (page - 1) * pageSize;
+  const limit = pageSize;
+
+  const { count, rows } = await Poliza.findAndCountAll({
+      order: [['id', 'ASC']],
+      offset: offset,
+      limit: limit
+  });
+
+  return {
+      totalItems: count,
+      totalPages: Math.ceil(count / pageSize),
+      currentPage: page,
+      pageSize: pageSize,
+      data: rows
+  };
+};
 
 const viewPolizaByNumber = async (numeroPoliza:string) => {
     return await Poliza.findOne({ where: {numeroPoliza}});
