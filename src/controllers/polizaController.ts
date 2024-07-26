@@ -35,7 +35,7 @@ const createPoliza = async (req: Request, res: Response) => {
 const viewPolizas = async (req: Request, res: Response) => {
     try {
         const page = parseInt(req.query.page as string) || 1;
-        const pageSize = parseInt(req.query.pageSize as string) || 10;
+        const pageSize = 2;
 
         const response = await polizaService.viewPolizas(page, pageSize);
         if (!response) {
@@ -91,6 +91,9 @@ const deletePolizaByNumber = async (req: Request, res: Response) => {
 };
 
 const filterPolizas = async (req: Request, res: Response) => {
+    const page = parseInt(req.query.page as string) || 1;
+    const pageSize = 2;
+
     try {
       const filters: Partial<PolizaProps> = {};
       if (req.query.asegurado) filters.asegurado = req.query.asegurado as string;
@@ -99,7 +102,7 @@ const filterPolizas = async (req: Request, res: Response) => {
       if (req.query.estado) filters.estado = req.query.estado as string;
       if (req.query.vigenciaInicio) filters.vigenciaInicio = new Date(req.query.vigenciaInicio as string);
       if (req.query.vigenciaFin) filters.vigenciaFin = new Date(req.query.vigenciaFin as string);
-      const polizas = await polizaService.filterPolizas(filters);
+      const polizas = await polizaService.filterPolizas(filters, page, pageSize);
       res.status(200).send(polizas);
     } catch (error) {
       res.status(500).send('Error fetching polizas');
