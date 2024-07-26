@@ -58,7 +58,9 @@ const deletePolizaByNumber = async (numeroPoliza:string) => {
     return poliza
 }
 
-const filterPolizas = async (filters: Partial<PolizaProps>) => {
+const filterPolizas = async (filters: Partial<PolizaProps>, page: number, pageSize: number) => {
+  const offset = (page - 1) * pageSize;
+  const limit = pageSize;
     const whereClause: any = {};
     if (filters.asegurado) {
       whereClause.asegurado = { [Op.iLike]: `%${filters.asegurado}%` };
@@ -80,10 +82,24 @@ const filterPolizas = async (filters: Partial<PolizaProps>) => {
     } else if (filters.vigenciaFin) {
       whereClause.vigenciaFin = { [Op.lte]: filters.vigenciaFin };
     }
-    return await Poliza.findAll({
-      where: whereClause,
-      order: [['id', 'ASC']]
+    // return await Poliza.findAll({
+    //   where: whereClause,
+    //   order: [['id', 'ASC']]
+    // });
+    const { count, rows } = await Poliza.findAndCountAll({
+        where: whereClause,
+        order: [['id', 'ASC']],
+        offset: offset,
+        limit: limit
     });
+
+    return {
+        totalItems: count,
+        totalPages: Math.ceil(count / pageSize),
+        currentPage: page,
+        pageSize: pageSize,
+        data: rows
+    };
 };
 
 export default {createPoliza, viewPolizas, viewPolizaByNumber, editPolizaByNumber, deletePolizaByNumber, filterPolizas}
