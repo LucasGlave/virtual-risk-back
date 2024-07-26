@@ -34,14 +34,16 @@ const createPoliza = async (req: Request, res: Response) => {
 
 const viewPolizas = async (req: Request, res: Response) => {
     try {
-        const response = await polizaService.viewPolizas();
-        if(!response) {
-            return res.status(400).send("Polizas not found")
+        const page = parseInt(req.query.page as string) || 1;
+        const pageSize = parseInt(req.query.pageSize as string) || 10;
+
+        const response = await polizaService.viewPolizas(page, pageSize);
+        if (!response) {
+            return res.status(400).send("Polizas not found");
         } else {
-            return res.status(200).send(response)
+            return res.status(200).send(response);
         }
-    }
-    catch (error: any) {
+    } catch (error: any) {
         return res.status(400).send({ error });
     }
 };
