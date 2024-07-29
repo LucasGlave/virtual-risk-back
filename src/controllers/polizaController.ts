@@ -92,7 +92,7 @@ const deletePolizaByNumber = async (req: Request, res: Response) => {
 
 const filterPolizas = async (req: Request, res: Response) => {
     const page = parseInt(req.query.page as string) || 1;
-    const pageSize = 2;
+    const pageSize = 5;
 
     try {
       const filters: Partial<PolizaProps> = {};
