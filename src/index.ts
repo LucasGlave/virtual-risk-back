@@ -18,7 +18,7 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: "https://virtual-risk-front.vercel.app/",
+    origin: "https://virtual-risk-front.vercel.app",
     credentials: true,
   })
 );
