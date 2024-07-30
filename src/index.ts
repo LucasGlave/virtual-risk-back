@@ -20,6 +20,11 @@ app.use(cookieParser());
 //   response.status(200).send("Hello World");
 // });
 
+// const corsOptions = {
+//   origin: 'https://virtual-risk-back.onrender.com',
+//   optionsSuccessStatus: 200
+// }
+
 app.use(
   cors({
     origin: "http://localhost:5173",

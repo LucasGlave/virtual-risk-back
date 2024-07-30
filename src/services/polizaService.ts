@@ -1,6 +1,5 @@
 import { Op } from "sequelize"
 import Poliza from "../models/poliza"
-import { body, param, validationResult } from 'express-validator';
 
 type PolizaProps = {
     asegurado: string,
@@ -82,10 +81,6 @@ const filterPolizas = async (filters: Partial<PolizaProps>, page: number, pageSi
     } else if (filters.vigenciaFin) {
       whereClause.vigenciaFin = { [Op.lte]: filters.vigenciaFin };
     }
-    // return await Poliza.findAll({
-    //   where: whereClause,
-    //   order: [['id', 'ASC']]
-    // });
     const { count, rows } = await Poliza.findAndCountAll({
         where: whereClause,
         order: [['id', 'ASC']],
