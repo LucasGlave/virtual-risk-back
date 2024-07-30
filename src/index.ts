@@ -10,6 +10,7 @@ dotenv.config();
 const app = express();
 
 const PORT = process.env.PORT;
+const PORT_PROD = process.env.PORT_PROD;
 
 app.use(express.json());
 app.use(bodyParser.json());
@@ -30,6 +31,6 @@ app.use("/api", routes);
 
 db.sync({ force: false })
   .then(() => {
-    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+    app.listen(PORT_PROD, () => console.log(`Server running on port ${PORT_PROD}`));
   })
   .catch((error) => console.error(error));
