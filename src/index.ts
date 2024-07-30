@@ -16,18 +16,9 @@ app.use(express.json());
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-// app.use("/", (_request: Request, response: Response) => {
-//   response.status(200).send("Hello World");
-// });
-
-// const corsOptions = {
-//   origin: 'https://virtual-risk-back.onrender.com',
-//   optionsSuccessStatus: 200
-// }
-
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://virtual-risk-front.vercel.app/",
     credentials: true,
   })
 );
