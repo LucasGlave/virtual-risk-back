@@ -20,7 +20,7 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: "https://virtual-risk-front.vercel.app",
+    origin: ['http://localhost:5173', 'https://virtual-risk-front.vercel.app'],
     credentials: true,
   })
 );
