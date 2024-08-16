@@ -10,8 +10,7 @@ import morgan from "morgan";
 dotenv.config();
 const app = express();
 
-const PORT = process.env.PORT;
-const PORT_PROD = process.env.PORT_PROD;
+const PORT = process.env.NODE_ENV === "prod" ? process.env.PORT_PROD : process.env.PORT;
 
 app.use(express.json());
 app.use(morgan("dev"))
@@ -20,15 +19,17 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: "https://virtual-risk-front.vercel.app",
+    origin: process.env.NODE_ENV === "prod" ? "https://virtual-risk-front.vercel.app" : "http://localhost:5173",
     credentials: true,
   })
 );
+
+console.log("En entorno ",process.env.NODE_ENV)
 
 app.use("/api", routes);
 
 db.sync({ force: false })
   .then(() => {
-    app.listen(PORT_PROD, () => console.log(`Server running on port ${PORT_PROD}`));
+    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
   })
   .catch((error) => console.error(error));
