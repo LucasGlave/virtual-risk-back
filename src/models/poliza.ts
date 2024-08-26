@@ -47,7 +47,7 @@ Poliza.init(
         allowNull: false,
     },
     premio: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.FLOAT,
         allowNull: false,
     },
     formaDePago: {
