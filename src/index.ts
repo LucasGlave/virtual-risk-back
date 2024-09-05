@@ -10,21 +10,28 @@ import morgan from "morgan";
 dotenv.config();
 const app = express();
 
-const PORT = process.env.NODE_ENV === "prod" ? process.env.PORT_PROD : process.env.PORT;
+const PORT =
+  process.env.NODE_ENV === "prod" ? process.env.PORT_PROD : process.env.PORT;
 
 app.use(express.json());
-app.use(morgan("dev"))
+app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
 app.use(
   cors({
-    origin: process.env.NODE_ENV === "prod" ? "https://www.virtualrisk.com.ar" : "http://localhost:5173",
+    origin:
+      process.env.NODE_ENV === "prod"
+        ? [
+            "https://www.virtualrisk.com.ar",
+            "https://virtual-risk-front.vercel.app",
+          ]
+        : "http://localhost:5173",
     credentials: true,
   })
 );
 
-console.log("En entorno ",process.env.NODE_ENV)
+console.log("En entorno ", process.env.NODE_ENV);
 
 app.use("/api", routes);
 
