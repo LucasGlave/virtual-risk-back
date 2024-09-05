@@ -52,8 +52,8 @@ Usuario.sync()
     if (count === 0) {
       const userSuperAdminToCreate: UsuarioCreationAttributes[] = [
         {
-          username: 'Virtual Risk',
-          password: 'v123',
+          username: 'VirtualRisk',
+          password: 'mardel2025',
         },
       ];
       const usersWithHashedPassword: UsuarioCreationAttributes[] = userSuperAdminToCreate.map((user) => {
