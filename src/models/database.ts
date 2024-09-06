@@ -4,13 +4,10 @@ import path from 'path';
 
 dotenv.config({ path: path.resolve(__dirname, '../../.env') });
 
-const db = new Sequelize({
-  database: process.env.DB_NAME, 
-  username: process.env.DB_USER,
-  password: process.env.DB_PASS,
-  host: process.env.DB_HOST,
+const connection = process.env.NODE_ENV === "prod" ? process.env.DB_CONNECTION_INT : process.env.DB_CONNECTION_EXT 
+
+const db = new Sequelize(connection as string, {
   dialect: 'postgres',
-  logging: false,
 });
 
 export default db;
