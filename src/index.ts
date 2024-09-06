@@ -22,10 +22,7 @@ app.use(
   cors({
     origin:
       process.env.NODE_ENV === "prod"
-        ? [
-            "https://www.virtualrisk.com.ar",
-            "https://virtual-risk-front.vercel.app",
-          ]
+        ? "https://www.virtualrisk.com.ar"
         : "http://localhost:5173",
     credentials: true,
   })
