@@ -28,7 +28,7 @@ app.use(
   })
 );
 
-console.log("En entorno ", process.env.NODE_ENV);
+console.log("En entorno", process.env.NODE_ENV,"in port", PORT);
 
 app.use("/api", routes);
 
