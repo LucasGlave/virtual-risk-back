@@ -30,4 +30,22 @@ const logoutUser = (req: Request, res: Response) => {
   res.status(200).send("Cookies deleted");
 };
 
-export default { loginUser, logoutUser };
+const getUsers = async (req: Request, res: Response) => {
+  try {
+    const users = await userService.getUsers()
+    res.status(200).send(users)
+  }catch(e){
+    res.status(400).send(`Error when trying get users: ${e}`)
+  }
+}
+
+const deleteUser = async (req: Request, res: Response) => {
+  try{
+    await userService.deleteUser(req.body)
+    res.sendStatus(201)
+  } catch(e) {
+    res.status(400).send(`Error when trying delete user: ${e}`)
+  }
+}
+
+export default { loginUser, logoutUser, getUsers, deleteUser };
