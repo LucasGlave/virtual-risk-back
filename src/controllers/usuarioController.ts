@@ -40,8 +40,9 @@ const getUsers = async (req: Request, res: Response) => {
 }
 
 const deleteUser = async (req: Request, res: Response) => {
+  const { id } = req.params
   try{
-    await userService.deleteUser(req.body)
+    await userService.deleteUser(+id)
     res.sendStatus(201)
   } catch(e) {
     res.status(400).send(`Error when trying delete user: ${e}`)

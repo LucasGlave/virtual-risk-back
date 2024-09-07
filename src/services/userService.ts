@@ -32,7 +32,7 @@ const getUsers = async ():Promise<Usuario[]> => {
     }
 }
 
-const deleteUser = async (id: string): Promise<void> => {
+const deleteUser = async (id: number): Promise<void> => {
     try {
         const userDeleted = await Usuario.destroy({ where: { id } });
         

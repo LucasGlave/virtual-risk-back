@@ -7,6 +7,6 @@ router
     .get("/", userController.getUsers)
     .post("/login", userController.loginUser)
     .post("/logout", userController.logoutUser)
-    .delete("/delete-user", userController.deleteUser)
+    .delete("/:id", userController.deleteUser)
 
 export default router;
