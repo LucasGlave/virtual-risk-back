@@ -9,17 +9,14 @@ const isProd = process.env.NODE_ENV === "prod";
 let db: Sequelize;
 
 if (isProd) {
-  const connectionProd = process.env.DB_CONNECTION_INT;
-  
+  const connectionProd = process.env.DB_PORT_PROD;
   if (!connectionProd) {
     throw new Error("La cadena de conexión a la base de datos no está definida en producción.");
   }
-
   db = new Sequelize(connectionProd, {
     dialect: "postgres",
     logging: false,
   });
-
 } else {
   const connectionDev = {
     database: process.env.DB_NAME,
