@@ -68,6 +68,9 @@ const filterPolizas = async (filters: Partial<PolizaProps>, page: number, pageSi
   if (filters.compañia) {
     whereClause.compañia = { [Op.iLike]: `%${filters.compañia}%` };
   }
+  if (filters.riesgo) {
+    whereClause.riesgo = { [Op.iLike]: `%${filters.riesgo}%` };
+  }
   if (filters.detalle) {
     whereClause.detalle = { [Op.iLike]: `%${filters.detalle}%` };
   }
